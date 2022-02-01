@@ -5,6 +5,9 @@ __pycache__
 db.sqlite3
 temp/*
 
+# Virtual environment
+djangotutorialenv/*
+
 # Any static data files
 *.csv  
 

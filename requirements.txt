@@ -1,5 +1,4 @@
 asgiref==3.5.0
 Django==3.2.11
-numpy==1.22.1
 pytz==2021.3
 sqlparse==0.4.2

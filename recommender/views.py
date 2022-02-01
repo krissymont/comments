@@ -1,10 +1,11 @@
+from re import A
 from recommender.forms import SearchForm
 from django.shortcuts import render
 from django.http import Http404, JsonResponse
 from .models import *
 from .forms import *
 from django.views.decorators.http import require_POST, require_GET
-import numpy as np
+import random
 
 
 def find_albums(artist, from_year = None, to_year = None):
@@ -30,10 +31,12 @@ def searchform_post(request):
                 from_year,
                 to_year
             )
-            
+        
         # Random 3 of top 10 popular albums
-        albums = list(np.random.permutation(albums[:10]))[:3] 
-        return render(request, 'recommender/searchform.html', {'form': form, 'albums': albums })
+        answer = albums[:10]
+        random.shuffle(answer)
+        answer = list(answer)[:3] 
+        return render(request, 'recommender/searchform.html', {'form': form, 'albums': answer })
     else:
         raise Http404('Something went wrong')
 
