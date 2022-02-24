@@ -37,8 +37,11 @@
 {% for album in albums %}
 
 <td>
-<iframe src="https://open.spotify.com/embed/track/{{ album.id }}" width="300" height="380" 
-frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <a href="{% url 'info' album.id %}">{{ album.name }}
+        <button type="submit">
+        <iframe src="https://open.spotify.com/embed/track/{{ album.id }}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </button>
+        </a>
 </td>
 
 {% endfor %}

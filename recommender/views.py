@@ -8,6 +8,7 @@ from django.views.decorators.http import require_POST, require_GET
 import random
 
 
+
 def find_albums(artist, from_year = None, to_year = None):
     query = Musicdata.objects.filter(artists__contains = artist)
     if from_year is not None:
@@ -35,7 +36,7 @@ def searchform_post(request):
         # Random 3 of top 10 popular albums
         answer = albums[:10]
         random.shuffle(answer)
-        answer = list(answer)[:3] 
+        answer = list(answer)[:5] 
         return render(request, 'recommender/searchform.html', {'form': form, 'albums': answer })
     else:
         raise Http404('Something went wrong')
@@ -45,4 +46,21 @@ def searchform_post(request):
 def searchform_get(request):
     form = SearchForm()
     return render(request, 'recommender/searchform.html', {'form': form})
+
+
+def about(request):
+	context = {'first_name': 'Krissy', 'last_name': 'Montalbano'}
+	return render(request, 'about.html', context)
+
+def home(request):
+    return render(request, 'home.html', {})
+
+def info(request, music_id):
+    if request.method == 'POST':
+        name = Musicdata.objects.get(pk=music_id)
+        form = MusicForm(request.POST or None, instance=name)
+
+    else:
+        name = Musicdata.objects.get(pk=music_id)
+        return render(request, 'info.html', {'name': name })
 

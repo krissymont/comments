@@ -1,4 +1,6 @@
 from django.db import models
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
 
 class Musicdata(models.Model):
     acousticness = models.FloatField()
@@ -21,4 +23,7 @@ class Musicdata(models.Model):
     valence = models.FloatField()
     year = models.IntegerField()
 
-
+class List(models.Model):
+    item = models.CharField(max_length=200)
+    def __str__(self):
+        return self.item
